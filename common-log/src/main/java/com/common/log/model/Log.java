@@ -29,4 +29,6 @@ public class Log {
 
     private final List<Throwable> exceptions = new ArrayList<>();
 
+    private final List<String> tail = new ArrayList<>();
+
 }
