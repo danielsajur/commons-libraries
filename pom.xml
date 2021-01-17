@@ -4,22 +4,30 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.1.RELEASE</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>com.sajur</groupId>
     <artifactId>commons-libraries</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>common-exceptions</module>
+        <module>common-exception</module>
         <module>common-log</module>
-        <module>common-api</module>
-        <module>common-service</module>
+        <module>common-crud-service</module>
+        <module>common-crud-controller</module>
     </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
         <spring-boot.version>2.3.1.RELEASE</spring-boot.version>
+        <build.sourceEncoding>UTF-8</build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -54,6 +62,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
@@ -69,11 +81,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <!-- LOGGER -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
         </dependency>
         <!-- TEST -->
         <dependency>
@@ -126,6 +133,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
@@ -146,12 +158,6 @@
                 <artifactId>lombok</artifactId>
                 <version>1.18.16</version>
             </dependency>
-            <!-- LOGGER -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>2.0.0-alpha1</version>
-            </dependency>
             <!-- TEST -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -166,6 +172,27 @@
                 <scope>test</scope>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <encoding>${build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
